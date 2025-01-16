@@ -30,3 +30,7 @@ Before anything else, I'll make my initial git commit so that I ensure my projec
 First, I'll install devise and create users. I followed the [docs](https://github.com/heartcombo/devise) steps to installation and generated their views.
 
 I changed the default migration so that the `User` table would also have a role, which I plan to be an `enum`: `t.integer :role, null: false, default: 0`
+
+## Basic Dashboard
+
+I created admin -> dashboardcontroller and member -> dashboardcontroller, each with an `index` action only, just to render the initial views and set the after sign in path for each of the roles.
