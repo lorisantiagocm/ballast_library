@@ -34,3 +34,11 @@ I changed the default migration so that the `User` table would also have a role,
 ## Basic Dashboard
 
 I created admin -> dashboardcontroller and member -> dashboardcontroller, each with an `index` action only, just to render the initial views and set the after sign in path for each of the roles.
+
+## Basic page layout
+
+Using a very basic drawing software called [Excalidraw](https://excalidraw.com/), I designed what the dashboard should look like before coding.
+
+![Books table](books.png "Books page")
+![Books table](dash_admin.png "Librarian dashboard")
+![Books table](dash_member.png "Member dashboard")
