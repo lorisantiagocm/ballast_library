@@ -59,3 +59,7 @@ end
 gem "devise", "~> 4.9"
 
 gem "pundit", "~> 2.4"
+
+gem "shakapacker", "= 8.0"
+
+gem "react-rails", "= 3.2"
