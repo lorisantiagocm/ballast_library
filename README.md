@@ -24,3 +24,9 @@ So I'll start by thinking the basic database entities:
 - Borrow: returned (bool, def false) user_id due_to (besides the default timestamps like created at and updated at)
 
 Before anything else, I'll make my initial git commit so that I ensure my project is safe.
+
+## Authentication
+
+First, I'll install devise and create users. I followed the [docs](https://github.com/heartcombo/devise) steps to installation and generated their views.
+
+I changed the default migration so that the `User` table would also have a role, which I plan to be an `enum`: `t.integer :role, null: false, default: 0`
