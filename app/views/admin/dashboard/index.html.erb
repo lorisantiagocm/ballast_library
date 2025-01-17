@@ -1,1 +1,132 @@
-<h1>librarian dashboard</h1>
+<div class="row">
+  <div class="ms-3">
+    <h3 class="mb-0 h4 font-weight-bolder">Dashboard</h3>
+    <p class="mb-4">
+      Check the books and borrows.
+    </p>
+  </div>
+  <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+    <div class="card">
+      <div class="card-header p-2 ps-3">
+        <div class="d-flex justify-content-between">
+          <div>
+            <p class="text-sm mb-0 text-capitalize">Total books</p>
+            <h4 class="mb-0"><%= @book_amount %></h4>
+          </div>
+          <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
+            <i class="material-symbols-rounded opacity-10">weekend</i>
+          </div>
+        </div>
+      </div>
+      <hr class="dark horizontal my-0">
+      <div class="card-footer p-2 ps-3">
+        <p class="mb-0 text-sm"><span class="text-success font-weight-bolder"><%= @book_copies_amount %> </span>copies in total</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+    <div class="card">
+      <div class="card-header p-2 ps-3">
+        <div class="d-flex justify-content-between">
+          <div>
+            <p class="text-sm mb-0 text-capitalize">Borrowed Books</p>
+            <h4 class="mb-0"><%= @current_borrows_amount %></h4>
+          </div>
+          <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
+            <i class="material-symbols-rounded opacity-10">person</i>
+          </div>
+        </div>
+      </div>
+      <hr class="dark horizontal my-0">
+      <div class="card-footer p-2 ps-3">
+        <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">+3% </span>than last month</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+    <div class="card">
+      <div class="card-header p-2 ps-3">
+        <div class="d-flex justify-content-between">
+          <div>
+            <p class="text-sm mb-0 text-capitalize">Books due today</p>
+            <h4 class="mb-0"><%= @borrows_due_today %></h4>
+          </div>
+          <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
+            <i class="material-symbols-rounded opacity-10">leaderboard</i>
+          </div>
+        </div>
+      </div>
+      <hr class="dark horizontal my-0">
+      <div class="card-footer p-2 ps-3">
+        <p class="mb-0 text-sm"><span class="text-danger font-weight-bolder">-2% </span>than yesterday</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-5">
+  <div class="col-12">
+    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+      <div class="input-group input-group-outline">
+        <label class="form-label">Search...</label>
+        <input type="text" class="form-control">
+        <a href="https://www.creative-tim.com/product/material-dashboard" class="btn btn-sm mb-0 me-1 bg-gradient-dark">Search</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row mt-5">
+  <div class="col-12">
+    <div class="card my-4">
+      <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+        <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
+          <h6 class="text-white text-capitalize ps-3">Overdue Books</h6>
+        </div>
+      </div>
+      <div class="card-body px-0 pb-2">
+        <div class="table-responsive p-0">
+          <table class="table align-items-center mb-0">
+            <thead>
+              <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Book</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Author</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Member and ID</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Due to</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Returned?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @overdue_borrows.each do |borrow| %>
+                <tr>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm"><%= borrow.book.title %></h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <h6 class="mb-0 text-sm"><%= borrow.book.author %></h6>
+                  </td>
+                  <td>
+                    <h6 class="mb-0 text-sm"><%= borrow.user.email %> (ID <%= borrow.user.id %>)</h6>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="text-secondary text-xs font-weight-bold"><h6 class="mb-0 text-sm"><%= borrow.due_to.strftime('%m/%d/%Y') %></h6></span>
+                  </td>
+                  <td class="align-middle text-center">
+                    <% if !borrow.returned %>
+                      <%= button_to "Mark as Returned", destroy_user_session_path, class: "btn btn-sm mb-0 me-1 bg-gradient-dark" %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
