@@ -5,7 +5,9 @@ module Admin
       @book_copies_amount = Book.all.sum(:total_copies)
       @current_borrows_amount = Borrow.all.current.count
       @borrows_due_today = Borrow.all.due_today.count
-      @overdue_borrows = Borrow.all.overdue
+
+      @q = Borrow.all.overdue.ransack(params[:q])
+      @overdue_borrows = @q.result(distinct: true)
     end
   end
 end
