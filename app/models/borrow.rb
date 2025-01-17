@@ -26,6 +26,8 @@ class Borrow < ApplicationRecord
   private
 
   def one_book_at_once_allowed
+    return if user.nil?
+
     if user.borrows.current.where(book_id: book_id).where.not(id: id).any?
       errors.add(:base, "user have two active borrows of the same book")
     end
