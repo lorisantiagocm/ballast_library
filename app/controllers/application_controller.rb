@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   include Pundit::Authorization
 
+  layout :layout_by_resource
+
   before_action :restrict_admin_access, if: -> { user_signed_in? }
 
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
@@ -19,6 +21,14 @@ class ApplicationController < ActionController::Base
 
     if request.path.start_with?("/member") && current_user.librarian?
       redirect_to root_path, alert: "You do not have access to the member area."
+    end
+  end
+
+  def layout_by_resource
+    if user_signed_in?
+      "application"
+    else
+      "signed_out"
     end
   end
 end
