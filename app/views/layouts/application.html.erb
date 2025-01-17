@@ -26,7 +26,6 @@
   <%# <link href="../assets/stylesheets/nucleo-icons.css" rel="stylesheet" />
   <link href="../assets/stylesheets/nucleo-svg.css" rel="stylesheet" /> %>
   <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <!-- Material Icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
   <!-- CSS Files -->
@@ -51,12 +50,12 @@
     <%= javascript_include_tag "popper.min.js" %>
 </head>
 
-<body class="g-sidenav-show  bg-gray-100">
+<body class="g-sidenav-show bg-gray-100">
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2  bg-white my-2" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand px-4 py-3 m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
-        <span class="ms-1 text-sm text-dark">Creative Tim</span>
+        <span class="ms-1 text-sm text-dark">Ballast Library</span>
       </a>
     </div>
     <hr class="horizontal dark mt-0 mb-2">
@@ -80,27 +79,15 @@
         </li>
       </ul>
     </div>
-    <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-      <div class="mx-3">
-        <a class="btn btn-outline-dark mt-4 w-100" href="https://www.creative-tim.com/learning-lab/bootstrap/overview/material-dashboard?ref=sidebarfree" type="button">Documentation</a>
-        <a class="btn bg-gradient-dark w-100" href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree" type="button">Upgrade to pro</a>
-      </div>
-    </div>
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
       <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
-          </ol>
-        </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
           </div>
-          <ul class="navbar-nav d-flex align-items-center  justify-content-end">
+          <ul class="navbar-nav d-flex align-items-center  justify-content-end" id="extraSideNav" onClick="toggleNav()">
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">
@@ -178,5 +165,35 @@
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <%# <script src="../assets/js/material-dashboard.min.js?v=3.2.0"></script> %>
 </body>
+<script>
+  function toggleNav() {
+    const iconNavbarSidenav = document.getElementById('iconNavbarSidenav');
+    const iconSidenav = document.getElementById('iconSidenav');
+    const extraSideNav = document.getElementById('extraSideNav');
+    const sidenav = document.getElementById('sidenav-main');
+    let body = document.getElementsByTagName('body')[0];
+    let className = 'g-sidenav-pinned';
+    
+    if (extraSideNav) {
+      extraSideNav.addEventListener('click', toggleSidenav);
+    }
+    
+    function toggleSidenav() {
+      if (body.classList.contains(className)) {
+        body.classList.remove(className);
+        setTimeout(function() {
+          sidenav.classList.remove('bg-white');
+        }, 500);
+        sidenav.classList.remove('bg-transparent');
+
+      } else {
+        body.classList.add(className);
+        sidenav.classList.add('bg-white');
+        sidenav.classList.remove('bg-transparent');
+        iconSidenav.classList.remove('d-none');
+      }
+    }
+  }
+</script>
 
 </html>

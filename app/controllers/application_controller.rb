@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :restrict_admin_access, if: -> { user_signed_in? }
 
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
-  allow_browser versions: :modern
+  # allow_browser versions: :modern
 
   def after_sign_in_path_for(resource)
     current_user.librarian? ? admin_dashboard_index_path : member_dashboard_index_path
