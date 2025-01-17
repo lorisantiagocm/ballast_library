@@ -63,3 +63,5 @@ gem "pundit", "~> 2.4"
 gem "sassc-rails"
 
 gem "ransack"
+
+gem 'faker'
