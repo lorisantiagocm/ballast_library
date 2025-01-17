@@ -1,0 +1,19 @@
+<%= form_with(model: @borrow, url: @borrow.persisted? ? admin_borrow_path : admin_borrows_path) do |form| %>
+  <% if @books.empty? %>
+    There are no books available
+  <% else %>
+    <div class="field">
+      <%= form.label :book %>
+      <%= form.select(:book_id, @books.map{ |b| [b.title, b.id] }) %>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user %>
+    <%= form.select(:user_id, @users.map{ |u| [u.email, u.id] }) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   enum :role, { member: 0, librarian: 1 }
 
+  has_many :borrows, dependent: :destroy
+
   def self.ransackable_attributes(auth_object = nil)
     ["email", "id", "id_value"]
   end

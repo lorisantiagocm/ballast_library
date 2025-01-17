@@ -126,7 +126,7 @@
                   </td>
                   <td class="align-middle text-center">
                     <% if !borrow.returned %>
-                      <%= button_to "Mark as Returned", destroy_user_session_path, class: "btn btn-sm mb-0 me-1 bg-gradient-dark" %>
+                      <%= button_to "Mark as Returned", toggle_returned_admin_borrow_path(borrow), class: "btn btn-sm mb-0 me-1 bg-gradient-dark" %>
                     <% end %>
                   </td>
                 </tr>
