@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-12 text-end">
+    <%= link_to "New book", new_admin_book_path, class: "btn mb-0 me-1 bg-gradient-dark" %>
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col-12">
+    <div class="card my-4">
+      <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+        <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
+          <h6 class="text-white text-capitalize ps-3">Books</h6>
+        </div>
+      </div>
+      <div class="card-body px-0 pb-2">
+        <div class="table-responsive p-0">
+          <table class="table align-items-center mb-0">
+            <thead>
+              <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Book</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Author</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Genre</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ISBN</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total Copies</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Available?</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @books.each do |book| %>
+                <tr>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm"><%= book.title %></h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <h6 class="mb-0 text-sm"><%= book.author %></h6>
+                  </td>
+                  <td>
+                    <h6 class="mb-0 text-sm"><%= book.genre %></h6>
+                  </td>
+                  <td>
+                    <h6 class="mb-0 text-sm"><%= book.isbn %></h6>
+                  </td>
+                  <td>
+                    <h6 class="mb-0 text-sm"><%= book.total_copies %></h6>
+                  </td>
+                  <td class="align-middle text-center">
+                    <% if book.available_to_borrow? %>
+                      <span class="badge badge-sm bg-gradient-success">Available</span>
+                    <% else %>
+                      <span class="badge badge-sm bg-gradient-secondary">Unavailable</span>
+                    <% end %>
+                  </td>
+                  <td class="align-middle text-center">
+                    <%= link_to "Edit", edit_admin_book_path(book), class: "btn btn-sm mb-0 me-1 bg-gradient-dark" %>
+                    <%= link_to 'Delete book', admin_book_path(book), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

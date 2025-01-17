@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :dashboard, only: :index
+    resources :books
   end
 
   namespace :member do
