@@ -45,6 +45,18 @@ RSpec.describe Borrow, type: :model do
     expect(borrow).to be_invalid
   end
 
+  describe 'overdue edge cases' do
+    it 'returns true if due an hour ago' do
+      borrow = create(:borrow, due_to: Time.current - 1.hour)
+      expect(borrow.overdue?).to eq(true)
+    end
+
+    it 'returns false if due in one hour' do
+      borrow = create(:borrow, due_to: Time.current + 1.day)
+      expect(borrow.overdue?).to eq(false)
+    end
+  end
+
   describe 'scopes' do
     it 'filters overdue borrows' do
       normal_borrow = create(:borrow)

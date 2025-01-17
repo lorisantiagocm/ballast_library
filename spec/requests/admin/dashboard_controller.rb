@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Admin::DashboardController", type: :request do
+RSpec.describe Admin::DashboardController, type: :request do
   let(:user) { create(:librarian) }
   let!(:book_1) { create(:book, total_copies: 3) }
   let!(:book_2) { create(:book, total_copies: 5) }

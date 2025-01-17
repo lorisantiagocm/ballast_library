@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Admin::Borrows", type: :request do
+RSpec.describe Admin::BorrowsController, type: :request do
   let(:user) { create(:librarian) }
 
   before do
