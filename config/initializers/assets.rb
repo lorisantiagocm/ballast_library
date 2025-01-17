@@ -9,4 +9,4 @@ Rails.application.config.assets.version = "1.0"
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
-# Rails.application.config.assets.precompile += %w[ admin.js admin.css ]
+Rails.application.config.assets.precompile += %w[ popper.min.js material-dashboard.min.js bootstrap.min.js perfect-scrollbar.min.js smooth-scrollbar.min.js chartjs.min.js nucleo-icons.css material-dashboard.css?v=3.2.0 nucleo-svg.css favicon.png apple-icon.png]
