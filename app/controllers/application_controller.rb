@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   before_action :restrict_admin_access, if: -> { user_signed_in? }
+  protect_from_forgery unless: -> { Rails.env.test? }
 
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   # allow_browser versions: :modern
