@@ -34,7 +34,6 @@ RSpec.describe Admin::BooksController, type: :request do
 
       assert_difference("Book.count") do
         post admin_books_path, params: { book: book.attributes }
-        File.open("teste#{Time.current.to_i}.html", 'w') { |file| file.write(response.body) }
       end
     end
 

@@ -1,5 +1,6 @@
 require 'factory_bot_rails'
 require 'devise'
+require "pundit/rspec"
 
 require File.expand_path("../../config/environment", __FILE__)
 require 'rails/all'
