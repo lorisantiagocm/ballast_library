@@ -1,5 +1,7 @@
 module Admin
   class BorrowsController < ApplicationController
+    before_action :authenticate_user!
+
     def index
       @borrows = Borrow.all
     end

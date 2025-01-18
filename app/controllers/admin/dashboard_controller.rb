@@ -1,5 +1,7 @@
 module Admin
   class DashboardController < ApplicationController
+    before_action :authenticate_user!
+
     def index
       @book_amount = Book.all.count
       @book_copies_amount = Book.all.sum(:total_copies)

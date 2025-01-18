@@ -3,8 +3,7 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
 
-  before_action :restrict_admin_access, if: -> { user_signed_in? }
-  protect_from_forgery unless: -> { Rails.env.test? }
+  before_action :restrict_access, if: -> { user_signed_in? }
 
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   # allow_browser versions: :modern
@@ -15,13 +14,14 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def restrict_admin_access
+  def restrict_access
     if request.path.start_with?("/admin") && current_user.member?
-      redirect_to root_path, alert: "You do not have access to the admin area."
+      redirect_to member_dashboard_index_path, alert: "You do not have access to the admin area."
+      return
     end
 
     if request.path.start_with?("/member") && current_user.librarian?
-      redirect_to root_path, alert: "You do not have access to the member area."
+      redirect_to admin_dashboard_index_path, alert: "You do not have access to the member area."
     end
   end
 
