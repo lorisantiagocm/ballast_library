@@ -40,8 +40,8 @@ I created admin -> dashboardcontroller and member -> dashboardcontroller, each w
 Using a very basic drawing software called [Excalidraw](https://excalidraw.com/), I designed what the dashboard should look like before coding.
 
 ![Books table](books.png "Books page")
-![Books table](dash_admin.png "Librarian dashboard")
-![Books table](dash_member.png "Member dashboard")
+![librarian dash](dash_admin.png "Librarian dashboard")
+![member dash](dash_member.png "Member dashboard")
 
 ## Frontend
 
@@ -59,9 +59,15 @@ I then started working on the sign in and sign up pages and improved general res
 
 ## Rspec Tests
 
-While I created the models and pages, I created their own Rspec tests (`model` and `requests` specs, specifically), so that I could make sure everything was working well without having to repeat all of the processes and test cases myself. I also installed `Simplecov` to check for thmy tests' coverage. I also installed `factorybot` and `rails-controller-testing` to test contorller instance variables.
+While I created the models and pages, I created their own Rspec tests (`model` and `requests` specs, specifically), so that I could make sure everything was working well without having to repeat all of the processes and test cases myself. I also installed `Simplecov` to check for the tests' coverage. I also installed `factorybot` and `rails-controller-testing` to test contorller instance variables.
+
+At the end, it was possible to archieve a 95% test coverage:
+
+![Coverage](coverage.png "Current coverage")
 
 # API
+
+I created the API under `api/v1` and it has a `BaseController` where is requires dookeeper authentication and rescues some of the errors with specific returned status codes, like the `Pundit::NotAuthorizedError`. I also defined `current_user` so that I could use it from their `doorkeeper_token`.
 
 ## Authentication
 
