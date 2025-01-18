@@ -45,7 +45,9 @@
                   <td class="align-middle text-center">
                     <% if borrow.overdue? %>
                       <span class="badge badge-sm bg-gradient-secondary">Overdue</span>
-                    <% elsif !borrow.returned? %>
+                    <% elsif borrow.returned? %>
+                      <span class="badge badge-sm bg-gradient-success">Returned</span>
+                    <% else %>
                       <span class="badge badge-sm bg-gradient-success"><%= (borrow.due_to.to_date - Date.current).to_i %> days remaining</span>
                     <% end %>
                   </td>
