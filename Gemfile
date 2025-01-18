@@ -70,3 +70,7 @@ gem "sassc-rails"
 gem "ransack"
 
 gem 'faker'
+
+gem 'doorkeeper'
+
+gem 'active_model_serializers'
