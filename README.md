@@ -106,6 +106,10 @@ it can be used to generate a dookeeper Bearer token that allows the application 
 }
 ```
 
+## Serialization
+
+I chose `active_model_serializers` to create the serializers with all of the infeormation what would be necessary for the basic CRUD with a good user experience on the front-end. `UserSerializer`, `BookSerializer` and `BorrowSerializer` were created for the API.
+
 # Policies/Permissions
 
 Both for the API and the main member application, I created a `BorrowPolicy` with a scope defined so that members could only see their own borrows and could not perform any write or destroy actions. THe one ones who can are librarians, who also can see anyone's borrows.
