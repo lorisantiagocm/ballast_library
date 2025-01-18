@@ -6,35 +6,41 @@ module Api
         render json: borrows, status: :ok, each_serializer: BorrowSerializer
       end
 
-      # def create
-      #   book = Book.new(book_params)
+      def create
+        authorize :borrow, :create?
 
-      #   if book.save
-      #     render json: book, status: :ok, serializer: BookSerializer
-      #   else
-      #     render_errors(book.errors.full_messages)
-      #   end
-      # end
+        borrow = Borrow.new(borrow_params)
+        borrow.due_to = Time.current + 14.days
 
-      # def update
-      #   book = Book.find(params[:id])
+        if borrow.save
+          render json: borrow, status: :created, serializer: BorrowSerializer
+        else
+          render_errors(borrow.errors.full_messages)
+        end
+      end
 
-      #   if book.update(book_params)
-      #     render json: book, status: :ok, serializer: BookSerializer
-      #   else
-      #     render_errors(book.errors.full_messages)
-      #   end
-      # end
+      def update
+        authorize :borrow, :update?
+        borrow = Borrow.find(params[:id])
 
-      # def destroy
-      #   book = Book.find(params[:id])
+        if borrow.update(borrow_params)
+          render json: borrow, status: :ok, serializer: BorrowSerializer
+        else
+          render_errors(borrow.errors.full_messages)
+        end
+      end
 
-      #   if book.destroy
-      #     head :no_content
-      #   else
-      #     render_errors(book.errors.full_messages)
-      #   end
-      # end
+      def destroy
+        authorize :borrow, :destroy?
+
+        borrow = Borrow.find(params[:id])
+
+        if borrow.destroy
+          head :no_content
+        else
+          render_errors(borrow.errors.full_messages)
+        end
+      end
 
       private
 

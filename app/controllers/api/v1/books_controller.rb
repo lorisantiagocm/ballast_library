@@ -10,7 +10,7 @@ module Api
         book = Book.new(book_params)
 
         if book.save
-          render json: book, status: :ok, serializer: BookSerializer
+          render json: book, status: :created, serializer: BookSerializer
         else
           render_errors(book.errors.full_messages)
         end
