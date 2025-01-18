@@ -10,7 +10,7 @@ class Book < ApplicationRecord
   }
 
   def available_to_borrow?
-    borrows.count < total_copies
+    borrows.current.count < total_copies
   end
 
   def self.ransackable_attributes(auth_object = nil)

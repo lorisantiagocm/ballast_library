@@ -35,6 +35,7 @@ class Borrow < ApplicationRecord
 
   def book_is_available
     return if book.nil?
+    return if persisted? && returned_changed? && returned
 
     errors.add(:base, "book is not available") if !book.available_to_borrow?
   end
