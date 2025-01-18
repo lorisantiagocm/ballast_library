@@ -28,6 +28,14 @@ RSpec.describe Admin::BorrowsController, type: :request do
     expect(response).to have_http_status(:ok)
   end
 
+  it 'toggles returned state' do
+    borrow = create(:borrow, returned: false)
+    post toggle_returned_admin_borrow_path(borrow)
+    borrow.reload
+
+    expect(borrow.returned).to eq(true)
+  end
+
   describe 'create and update' do
     it 'creates a new borrow' do
       book = create(:book)

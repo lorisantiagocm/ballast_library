@@ -7,6 +7,8 @@ module Api
       end
 
       def create
+        authorize :book, :create?
+
         book = Book.new(book_params)
 
         if book.save
@@ -17,6 +19,8 @@ module Api
       end
 
       def update
+        authorize :book, :update?
+
         book = Book.find(params[:id])
 
         if book.update(book_params)
@@ -27,6 +31,8 @@ module Api
       end
 
       def destroy
+        authorize :book, :destroy?
+
         book = Book.find(params[:id])
 
         if book.destroy
