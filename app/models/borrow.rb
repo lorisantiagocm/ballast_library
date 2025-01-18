@@ -29,7 +29,7 @@ class Borrow < ApplicationRecord
     return if user.nil?
 
     if user.borrows.current.where(book_id: book_id).where.not(id: id).any?
-      errors.add(:base, "user have two active borrows of the same book")
+      errors.add(:base, "user has two active borrows of the same book")
     end
   end
 
