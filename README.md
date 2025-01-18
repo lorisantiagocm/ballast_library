@@ -42,3 +42,88 @@ Using a very basic drawing software called [Excalidraw](https://excalidraw.com/)
 ![Books table](books.png "Books page")
 ![Books table](dash_admin.png "Librarian dashboard")
 ![Books table](dash_member.png "Member dashboard")
+
+## Frontend
+
+After I decided  how the frontend would be, I tried installing a library that would allow me to use react on ruby on rails, but it didn't work, so I started using a bootstrap template.
+
+## Routes
+
+To make basic permissions easier, I made the application have 2 main namespaces, `/admin` and `/member` and each role would only have aacess to their own namespace.
+
+I started by the `/admin` pages, with the books and borrows pages and tables, and then creating the main dashboard.
+
+During the process, I already installed `ransack` so that it could be used on the pages' searching.
+
+I then started working on the sign in and sign up pages and improved general responsiveness.
+
+## Rspec Tests
+
+While I created the models and pages, I created their own Rspec tests (`model` and `requests` specs, specifically), so that I could make sure everything was working well without having to repeat all of the processes and test cases myself. I also installed `Simplecov` to check for thmy tests' coverage. I also installed `factorybot` and `rails-controller-testing` to test contorller instance variables.
+
+# API
+
+## Authentication
+
+To authenticate, I'm using doorkeeper with credentials.
+```shell
+=> 
+#<Doorkeeper::Application:0x0000750eed58fa18
+ id: 1,
+ name: "Doorkeeper Test",
+ uid: "2wjaLjb9L3-yoc42_K3BZEOMVHzUfYNGmBadkT3ISw0",
+ secret: "[FILTERED]",
+ redirect_uri: "urn:ietf:wg:oauth:2.0:oob",
+ scopes: "",
+ confidential: false,
+ created_at: "2025-01-18 02:58:55.944370000 +0000",
+ updated_at: "2025-01-18 02:58:55.944370000 +0000">
+ballast-library(dev)> 
+```
+
+After creating, just get the appication uid:
+
+```shell
+ballast-library(dev)> a.uid
+=> "2wjaLjb9L3-yoc42_K3BZEOMVHzUfYNGmBadkT3ISw0"
+ballast-library(dev)> 
+```
+
+it can be used to generate a dookeeper Bearer token that allows the application to know who is requesting (there are some default users on `seeds.rb`):
+
+```json
+{
+    "grant_type": "password",
+    "email": "member@member.com",
+    "password": "qwe123",
+    "client_id": "2wjaLjb9L3-yoc42_K3BZEOMVHzUfYNGmBadkT3ISw0"
+}
+```
+
+# Policies/Permissions
+
+Both for the API and the main member application, I created a `BorrowPolicy` with a scope defined so that members could only see their own borrows and could not perform any write or destroy actions. THe one ones who can are librarians, who also can see anyone's borrows.
+
+# How to run this application
+
+1. Install dependencies
+
+ruby 3.3.3
+
+2. clone the repo and run `bundle install` inside the application folder
+
+3. run `rails db:create db:migrate db:seed`
+
+4. run tests with `bundle exec rspec`
+
+5. create server with `rails s` on the terminal
+
+6. To test the API, get the credentials from `seeds` and get the Doorkeeper Application UID from rails console or directly from the database and follow the steps on "Api -> Authentication"
+
+7. To test the general frontend, just visit `http://localhost:3000/`
+
+# Next steps
+
+Since it's a test application I didn't feel the need to add pagination, but it would be better for optimization.
+
+A simple React front-end would be easy to make with pre-made templates like MUI.
