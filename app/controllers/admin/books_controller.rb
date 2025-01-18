@@ -3,7 +3,8 @@ module Admin
     before_action :authenticate_user!
 
     def index
-      @books = Book.all
+      @q = Book.all.ransack(params[:q])
+      @books = @q.result(distinct: true)
     end
 
     def new

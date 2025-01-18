@@ -39,7 +39,7 @@
       </div>
       <hr class="dark horizontal my-0">
       <div class="card-footer p-2 ps-3">
-        <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">+3% </span>than last month</p>
+        <p class="mb-0 text-sm"></p>
       </div>
     </div>
   </div>
@@ -58,7 +58,7 @@
       </div>
       <hr class="dark horizontal my-0">
       <div class="card-footer p-2 ps-3">
-        <p class="mb-0 text-sm"><span class="text-danger font-weight-bolder">-2% </span>than yesterday</p>
+        <p class="mb-0 text-sm"></p>
       </div>
     </div>
   </div>
@@ -77,6 +77,9 @@
 
         <%= f.label :user_email_cont %>
         <%= f.search_field :user_email_cont %>
+
+        <%= f.label :book_genre_cont %>
+        <%= f.search_field :book_genre_cont %>
 
         <%= f.submit 'Search', class: 'btn btn-sm mb-0 me-1 bg-gradient-dark' %>
       <% end %>

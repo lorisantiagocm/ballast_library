@@ -124,7 +124,7 @@ ruby 3.3.3
 
 5. create server with `rails s` on the terminal
 
-6. To test the API, get the credentials from `seeds` and get the Doorkeeper Application UID from rails console or directly from the database and follow the steps on "Api -> Authentication"
+6. To test the API, get the credentials from `seeds` and get the Doorkeeper Application UID from rails console or directly from the database and follow the steps on "Api -> Authentication". I also added a Postman collection to the repository: `Ballast Library.postman_collection`
 
 7. To test the general frontend, just visit `http://localhost:3000/`
 
