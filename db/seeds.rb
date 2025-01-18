@@ -8,6 +8,17 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+librarian = User.create(
+  email: "lib@lib.com",
+  password: "qwe123",
+  role: User.roles[:librarian]
+)
+
+member = User.create(
+  email: "member@member.com",
+  password: "qwe123"
+)
+
 10.times do
   User.create(
     email: Faker::Internet.email,
@@ -35,3 +46,15 @@ Book.all.each do |book|
     due_to: Time.current + rand(0..10).days
   )
 end
+
+member_example_borrow = Borrow.create(
+  book: Book.last,
+  user: member,
+  due_to: Time.current + rand(0..10).days
+)
+
+Doorkeeper::Application.create(
+  name: 'Doorkeeper Test',
+  redirect_uri: 'urn:ietf:wg:oauth:2.0:oob',
+  confidential: false
+)

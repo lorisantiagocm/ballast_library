@@ -17,4 +17,16 @@ class BorrowPolicy < ApplicationPolicy
 
     attr_reader :user, :scope
   end
+
+  def create?
+    user.librarian?
+  end
+
+  def update?
+    user.librarian?
+  end
+
+  def destroy?
+    user.librarian?
+  end
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  use_doorkeeper
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -13,6 +14,13 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   devise_scope :user do
     root to: "devise/sessions#new"
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :books
+      resources :borrows
+    end
   end
 
   namespace :admin do
