@@ -5,6 +5,11 @@ RSpec.describe Admin::BorrowsController, type: :request do
 
   before do
     sign_in user
+    ActionController::Base.allow_forgery_protection = false
+  end
+
+  after do
+    ActionController::Base.allow_forgery_protection = true
   end
 
   it 'renders the index' do

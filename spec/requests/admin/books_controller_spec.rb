@@ -5,6 +5,11 @@ RSpec.describe Admin::BooksController, type: :request do
 
   before do
     sign_in user
+    ActionController::Base.allow_forgery_protection = false
+  end
+
+  after do
+    ActionController::Base.allow_forgery_protection = true
   end
 
   it 'renders the index' do
@@ -29,6 +34,7 @@ RSpec.describe Admin::BooksController, type: :request do
 
       assert_difference("Book.count") do
         post admin_books_path, params: { book: book.attributes }
+        File.open("teste#{Time.current.to_i}.html", 'w') { |file| file.write(response.body) }
       end
     end
 
